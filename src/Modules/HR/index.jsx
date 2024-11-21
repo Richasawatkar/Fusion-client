@@ -17,6 +17,8 @@ import LTCFormView from "./pages/LTCPageComp/LTCFormView";
 import CPDA_ClaimFormView from "./pages/CPDA_ClaimPageComp/CPDA_ClaimFormView";
 import CPDA_ClaimFilehandle from "./pages/CPDA_ClaimPageComp/CPDA_Claim_file_handle";
 
+import { MantineProvider } from "@mantine/core"; // Import MantineProvider
+
 export default function HR() {
   return (
     <Routes>
@@ -51,5 +53,6 @@ export default function HR() {
 
       <Route path="FormView/*" element={<FormView />} />
     </Routes>
+    // </MantineProvider>
   );
 }

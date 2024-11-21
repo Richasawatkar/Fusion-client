@@ -11,92 +11,92 @@
   /* background-color: white; */
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.1);
 
-  border-radius: 10px;
-
-}
-
-.Leave_container form {
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.Leave_container .grid-section {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-}
-
-.Leave_container .grid-section.full-width {
-  grid-template-columns: 1fr;
-}
-
-.grid-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 20px;
-}
-
-.Leave_container .grid-row.three-cols {
-  grid-template-columns: 1fr 1fr 1fr;
-}
-
-.Leave_container .input-wrapper {
-  position: relative;
-  display: flex;
-  align-items: center;
-  gap: 10px;
-  ;
-}
-
-.Leave_container .input-wrapper input,
-.Leave_container .select {
-  width: 100%;
-  padding: 8px 14px;
-  font-size: 14px;
-  border: 1px solid #ccc;
-  border-radius: 4px;
-  transition: border-color 0.3s ease;
-  color: black !important;
-}
-
-.Leave_container .input-wrapper input {
-  padding-left: 50px;
-  color: #000 !important;
-
-}
-
-.Leave_container .input-wrapper input:focus,
-.Leave_container .select:focus {
-  /* border-color: #15abff20; */
-  border: 2px solid #15abff;
-  /* border: 4px; */
-  outline: none;
-}
-
-.Leave_container .footer-section {
-  display: flex;
-  justify-content: flex-start;
-  gap: 20px;
-  margin-bottom: -5px;
-  margin-right: -25px;
-}
-
-.Leave_container .username-input,
-.Leave_container .designation-input {
-  width: 100%;
-}
-
-.Leave_container .right-side {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
-}
-
-.Leave_container .center {
-  justify-content: center;
-}
+  }
+  
+  .Leave_container form {
+    display: flex;
+    flex-direction: column; 
+    gap: 20px;
+  }
+  
+  .Leave_container .grid-section {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  
+  .Leave_container .grid-section.full-width {
+    grid-template-columns: 1fr;
+  }
+  
+  .grid-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+  }
+  
+  .Leave_container .grid-row.three-cols {
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+  
+  .Leave_container .input-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background-color: white;
+    gap: 10px;
+    ;
+  }
+  
+  .Leave_container .input-wrapper input,
+  .Leave_container .select {
+    width: 100%;
+    padding: 8px 14px;
+    font-size: 14px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    transition: border-color 0.3s ease;
+    color:black !important;
+  }
+  
+  .Leave_container .input-wrapper input {
+    padding-left: 50px;
+    color: #000 !important;
+    
+  }
+  
+  .Leave_container .input-wrapper input:focus,
+  .Leave_container .select:focus {
+    /* border-color: #15abff20; */
+    border: 2px solid #15abff;
+    /* border: 4px; */
+    outline: none;
+  }
+  
+  .Leave_container .footer-section {
+    display: flex;
+    justify-content: flex-start;
+    gap: 20px;
+    margin-bottom: -5px;
+    margin-right: -25px;
+  }
+  
+  .Leave_container .username-input,
+  .Leave_container .designation-input {
+    width: 100%;
+  }
+  
+  .Leave_container .right-side {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  
+  .Leave_container .center {
+    justify-content: center;
+  }
+  
 
 
 
@@ -333,12 +333,10 @@
 /* .grid-row{
     width: 70%;
     background-color: red;
-  } */
-/* Grid container for the layout */
+  } *//* Grid container for the layout */
 .grid-container {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  /* Two items per row */
+  grid-template-columns: repeat(2, 1fr); /* Two items per row */
   gap: 1rem;
   padding: 1rem;
 }
@@ -358,8 +356,7 @@
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  flex-wrap: wrap;
-  /* For responsive design */
+  flex-wrap: wrap; /* For responsive design */
 }
 
 /* Styling for leave type and available details */
@@ -370,13 +367,15 @@
 }
 
 .leave-type {
-  font-size: 14px;
-  font-weight: 600;
+  font-family: 'Roboto', sans-serif;  
+  font-size: 16px;  
+ 
 }
 
 .available-details {
-  font-size: 12px;
-  font-weight: 500;
+  font-family: 'Roboto', sans-serif;  
+  font-size: 16px;  
+  
 }
 
 /* Styling for each leave detail */
@@ -387,14 +386,14 @@
 }
 
 .detail-label {
-  font-size: 12px;
-  font-weight: 500;
-  margin-bottom: 0.3rem;
+  font-family: 'Roboto', sans-serif;  
+  font-size: 16px;  
+ 
 }
 
 .detail-input {
   padding: 0.3rem;
-  font-size: 12px;
+  font-size: 16px;
   border: 1px solid #ddd;
   border-radius: 4px;
   width: 100%;

@@ -9,6 +9,7 @@ export const get_form_id = `${host}/hr2/api/get_form_id`;
 export const get_leave_requests = `${host}/hr2/api/get_leave_requests`;
 export const get_leave_inbox = `${host}/hr2/api/get_leave_inbox`;
 export const get_leave_archive = `${host}/hr2/api/get_leave_archive`;
+export const get_leave_balance = `${host}/hr2/api/get_leave_balance`;
 export const submit_leave_form = `${host}/hr2/api/submit_leave_form`;
 export const view_leave_form = `${host}/hr2/api/view_leave_form_data`;
 export const leave_edit_handle = `${host}/hr2/api/leave_edit_handle`;

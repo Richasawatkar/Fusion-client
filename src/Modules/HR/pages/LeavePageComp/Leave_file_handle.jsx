@@ -45,6 +45,7 @@ const LeaveFilehandle = () => {
   const [designation_reciever, setDesignation_reciever] = useState("");
   const [remark, setRemark] = useState("");
   const navigate = useNavigate();
+  const [leaveBalances, setLeaveBalances] = useState([]);
 
   //   get archive from query params
   const [archive, setArchive] = useState(false);
@@ -134,6 +135,9 @@ const LeaveFilehandle = () => {
         let data = await response.json();
 
         setfetchedformData(data);
+        setLeaveBalances(data.natureOfLeave || []); // Ensure leaveBalances is set correctly
+        console.log(data);
+        console.log(fetchedformData);
         setLoading(false);
       } catch (error) {
         console.error("Failed to fetch form data:", error);
@@ -149,6 +153,38 @@ const LeaveFilehandle = () => {
     setfetchedformData((prevData) => ({
       ...prevData,
       [name]: value,
+    }));
+  };
+
+  // const handleLeaveBalanceChange = (index, field, value) => {
+  //   setLeaveBalances((prevBalances) => {
+  //     const newBalances = [...prevBalances];
+  //     newBalances[index] = { ...newBalances[index], [field]: value };
+  //     return newBalances;
+  //   });
+  // };
+
+  // const handleLeaveBalanceChange = (index, field, value) => {
+  //   setLeaveBalances((prevBalances) => {
+  //     const newBalances = [...prevBalances];
+  //     newBalances[index] = { ...newBalances[index], [field]: value };
+  //     setfetchedformData((prevData) => ({
+  //       ...prevData,
+  //       natureOfLeave: newBalances,
+  //     }));
+  //     console.log(newBalances);
+  //     return newBalances;
+  //   });
+  // };
+
+  const handleLeaveBalanceChange = (index, field, value) => {
+    const newBalances = leaveBalances.map((balance, i) =>
+      i === index ? { ...balance, [field]: value } : balance,
+    ); // Update the state
+    setLeaveBalances(newBalances);
+    setfetchedformData((prevData) => ({
+      ...prevData,
+      natureOfLeave: newBalances,
     }));
   };
 
@@ -177,7 +213,8 @@ const LeaveFilehandle = () => {
       submissionDate: fetchedformData.submissionDate,
       departmentInfo: fetchedformData.departmentInfo,
       pfNo: fetchedformData.pfNo,
-      natureOfLeave: fetchedformData.natureOfLeave,
+      // natureOfLeave: fetchedformData.natureOfLeave,
+      natureOfLeave: leaveBalances,
       leaveStartDate: fetchedformData.leaveStartDate,
       leaveEndDate: fetchedformData.leaveEndDate,
       purposeOfLeave: fetchedformData.purposeOfLeave,
@@ -408,60 +445,156 @@ const LeaveFilehandle = () => {
             </div>
           </div>
 
-          {/* Section 3: Nature of Leave, Leave Start Date, Leave End Date */}
-          <div className="grid-row three-columns">
-            <div className="grid-col">
-              <label className="input-label" htmlFor="natureOfLeave">
-                Nature of Leave
-              </label>
-              <div className="input-wrapper">
-                <Building size={20} />
-                <input
-                  type="text"
-                  id="natureOfLeave"
-                  name="natureOfLeave"
-                  value={fetchedformData.natureOfLeave}
-                  className="input"
-                  onChange={handleChange}
-                  disabled={!isEditing}
-                />
+          <div className="grid-container">
+            {leaveBalances?.map((item, index) => (
+              <div className="grid-item" key={index}>
+                {/* Single Leave Component */}
+                <div className="leave-component-row">
+                  {/* Leave Type and Available */}
+                  <div className="leave-type-section">
+                    <span className="leave-type">{item.leavetype}</span>
+                    <span className="available-details">
+                      Available:{" "}
+                      <span className="available-count">
+                        {item.availableCount}
+                      </span>
+                    </span>
+                  </div>
+
+                  {/* Start Date */}
+                  <div className="leave-detail">
+                    <label
+                      className="detail-label"
+                      htmlFor={`startDate-${index}`}
+                    >
+                      Start Date
+                    </label>
+                    <input
+                      type="date"
+                      id={`startDate-${index}`}
+                      name="startDate"
+                      value={item.startDate}
+                      onChange={(e) =>
+                        handleLeaveBalanceChange(
+                          index,
+                          "startDate",
+                          e.target.value,
+                        )
+                      }
+                      className="detail-input"
+                      // required
+                    />
+                  </div>
+
+                  {/* End Date */}
+                  <div className="leave-detail">
+                    <label
+                      className="detail-label"
+                      htmlFor={`endDate-${index}`}
+                    >
+                      End Date
+                    </label>
+                    <input
+                      type="date"
+                      id={`endDate-${index}`}
+                      name="endDate"
+                      value={item.endDate}
+                      onChange={(e) =>
+                        handleLeaveBalanceChange(
+                          index,
+                          "endDate",
+                          e.target.value,
+                        )
+                      }
+                      className="detail-input"
+                      // required
+                    />
+                  </div>
+
+                  {/* Duration */}
+                  <div className="leave-detail">
+                    <label
+                      className="detail-label"
+                      htmlFor={`duration-${index}`}
+                    >
+                      Duration (Days)
+                    </label>
+                    <input
+                      type="number"
+                      id={`duration-${index}`}
+                      name="duration"
+                      value={item.duration}
+                      onChange={(e) =>
+                        handleLeaveBalanceChange(
+                          index,
+                          "duration",
+                          e.target.value,
+                        )
+                      }
+                      className="detail-input"
+                      // required
+                    />
+                  </div>
+                </div>
+              </div>
+            ))}
+
+            {/* Extra Row for Last Row's Components */}
+            {/* {leaveBalances.length % 2 !== 0 && ( */}
+            <div className="grid-item last-row">
+              {/* Leave Start Date */}
+              <div className="leave-detail">
+                <label className="detail-label" htmlFor="leaveStartDate">
+                  Leave Start Date
+                </label>
+                <div className="input-wrapper">
+                  {/* <Calendar size={20} /> */}
+                  <input
+                    type="date"
+                    id="leaveStartDate"
+                    name="leaveStartDate"
+                    value={fetchedformData.leaveStartDate}
+                    onChange={handleChange}
+                    // onChange={(e) =>
+                    //   handleLeaveBalanceChange(
+                    //     index,
+                    //     "startDate",
+                    //     e.target.value,
+                    //   )
+                    // }
+                    className="detail-input"
+                    required
+                  />
+                </div>
+              </div>
+
+              {/* Leave End Date */}
+              <div className="leave-detail">
+                <label className="detail-label" htmlFor="leaveEndDate">
+                  Leave End Date
+                </label>
+                <div className="input-wrapper">
+                  {/* <Calendar size={20} /> */}
+                  <input
+                    type="date"
+                    id="leaveEndDate"
+                    name="leaveEndDate"
+                    value={fetchedformData.leaveEndDate}
+                    onChange={handleChange}
+                    // onChange={(e) =>
+                    //   handleLeaveBalanceChange(
+                    //     index,
+                    //     "startDate",
+                    //     e.target.value,
+                    //   )
+                    // }
+                    className="detail-input"
+                    required
+                  />
+                </div>
               </div>
             </div>
-            <div className="grid-col">
-              <label className="input-label" htmlFor="leaveStartDate">
-                Leave Start Date
-              </label>
-              <div className="input-wrapper">
-                <Calendar size={20} />
-                <input
-                  type="date"
-                  id="leaveStartDate"
-                  name="leaveStartDate"
-                  value={fetchedformData.leaveStartDate}
-                  className="input"
-                  onChange={handleChange}
-                  disabled={!isEditing}
-                />
-              </div>
-            </div>
-            <div className="grid-col">
-              <label className="input-label" htmlFor="leaveEndDate">
-                Leave End Date
-              </label>
-              <div className="input-wrapper">
-                <Calendar size={20} />
-                <input
-                  type="date"
-                  id="leaveEndDate"
-                  name="leaveEndDate"
-                  value={fetchedformData.leaveEndDate}
-                  className="input"
-                  onChange={handleChange}
-                  disabled={!isEditing}
-                  required
-                />
-              </div>
-            </div>
+            {/* )} */}
           </div>
 
           {/* Section 4: Purpose of Leave, Address during Leave */}
